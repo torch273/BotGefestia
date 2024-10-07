@@ -15,18 +15,19 @@ EMAIL = 'mega.tamu@yandex.ru'
 PWD = 'xkdxdidokeiktfby'
 TO_EMAIL = 'mega.tamu@yandex.ru'
 
-# Путь к PDF файлу
-PDF_FILE_PATH = 'D:/price.pdf'
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_photo(message.chat.id, open('D:/gefestia.jpg', 'rb'))
+    bot.send_photo(message.chat.id, open('/root/gefestia.jpg', 'rb'))
     keyboard = types.InlineKeyboardMarkup()
     button1 = types.InlineKeyboardButton(text="Оставить заявку", callback_data="take_request")
     button2 = types.InlineKeyboardButton(text="Наши цены", callback_data="send_pdf")
     button3 = types.InlineKeyboardButton(text="Наши работы", callback_data="send_link")
     keyboard.add(button1, button2, button3)
-    bot.send_message(message.chat.id, "Добрый день, {0.first_name}! Я бот для строительно-ремонтной компании Гефестия. Нажмите на кнопки ниже для большей информации.".format (message.from_user), reply_markup=keyboard)
+    bot.send_message(message.chat.id, "Добрый день, {0.first_name}! Я бот строительно-ремонтной компании Гефестия. Нажмите на кнопки ниже для большей информации.".format (message.from_user), reply_markup=keyboard)
+
+
+
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
@@ -58,11 +59,9 @@ def send_email(user_name, user_id, user_message):
     server.quit()
 
 def send_pdf(message):
-    with open(PDF_FILE_PATH, 'rb') as f:
-        pdf_data = f.read()
-    bot.send_document(message.chat.id, pdf_data, caption='Наш прайс-лист.')
+    bot.send_message(message.chat.id, "Ссылка на PDF-файл с нашими ценами: https://disk.yandex.ru/i/-F1GhxCU8q1l1Q")
 
 def send_link(message):
-    bot.send_message(message.chat.id, "Тут будет ссылка на статью или файл с примерами работ: https://example.com")
+    bot.send_message(message.chat.id, "Ссылка на архив фотографий наших работ, который постоянно пополняется: https://imgur.com/a/wJ8v8D5")
 
 bot.polling(none_stop=True)
