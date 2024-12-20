@@ -7,7 +7,7 @@ from email.mime.application import MIMEApplication
 import os
 
 # Токен Telegram бота
-TOKEN = '7810590914:AAH5TmZuFJ_0AF7X7WbcaVJkGJfHCelCAEQ'
+TOKEN = ''
 bot = telebot.TeleBot(TOKEN)
 
 # Данные для SMTP
